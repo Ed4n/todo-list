@@ -11,7 +11,12 @@ const localStorageTodosInstance = allTodos;
 // localStorage.setItem("todos", JSON.stringify(localStorageTodosInstance));
 
 function App() {
-  const [todos, saveTodos] = useLocalStorage("todos", []);
+  const {
+    item: todos,
+    saveItem: saveTodos,
+    loading,
+    error,
+  } = useLocalStorage("todos", []);
 
   //STATES // ==========================================
   const [searchValue, setSearchValue] = useState("");
@@ -49,6 +54,8 @@ function App() {
       searchedTodos={searchedTodos}
       completeTodos={completeTodos}
       deleteTodos={deleteTodos}
+      loading={loading}
+      error={error}
     />
   );
 }

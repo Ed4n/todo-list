@@ -15,12 +15,20 @@ export default function AppUI({
   searchedTodos,
   completeTodos,
   deleteTodos,
+  loading,
+  error,
 }) {
   return (
     <div className=" p-7 flex flex-col gap-3 w-full h-screen justify-start items-center">
       <TodoSearch searchValue={searchValue} setSearchValue={setSearchValue} />
+
       <TodoCounter completedTodos={completedTodos} allTodos={totalTodos} />
+
       <TodoList>
+        {/* In this case the && menas that if the first condition is true, then the second one will be executed */}
+        {loading && <p> Cargando...</p>}
+        {error && <p> Error...</p>}
+        {searchedTodos.length === 0 && !loading && <p> Crea tu primer TODO</p>}
         {searchedTodos.map((todo) => (
           <TodoItem
             key={todo.id}

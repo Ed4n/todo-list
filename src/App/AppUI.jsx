@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 
 //Components //
 import TodoSearch from "../components/TodoSearch";
@@ -6,23 +6,27 @@ import TodoCounter from "../components/TodoCounter";
 import TodoList from "../components/TodoList";
 import AddTodo from "../components/AddTodo";
 import TodoItem from "../components/TodoItem";
+import { TodoContext } from "../context/TodoContext";
+import Modal from "../components/Modal";
 
-export default function AppUI({
-  searchValue,
-  setSearchValue,
-  totalTodos,
-  completedTodos,
-  searchedTodos,
-  completeTodos,
-  deleteTodos,
-  loading,
-  error,
-}) {
+// Hooks //
+
+export default function AppUI() {
+  const {
+    searchedTodos,
+    completeTodos,
+    deleteTodos,
+    loading,
+    error,
+    openModal,
+    setModal,
+  } = useContext(TodoContext);
+
   return (
     <div className=" p-7 flex flex-col gap-3 w-full h-screen justify-start items-center">
-      <TodoSearch searchValue={searchValue} setSearchValue={setSearchValue} />
+      <TodoSearch />
 
-      <TodoCounter completedTodos={completedTodos} allTodos={totalTodos} />
+      <TodoCounter />
 
       <TodoList>
         {/* In this case the && menas that if the first condition is true, then the second one will be executed */}
@@ -41,6 +45,12 @@ export default function AppUI({
       </TodoList>
 
       <AddTodo />
+
+      {openModal && (
+        <Modal>
+          <p>Esto es un modal</p>
+        </Modal>
+      )}
     </div>
   );
 }

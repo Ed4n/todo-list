@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { allTodos } from "../db.js";
 /**
  * @param {*} itemName 
  * @param {*} initialValue 
@@ -36,11 +37,6 @@ export default function useLocalStorage(itemName, initialValue) {
 
     }, []);
 
-
-
-
-
-
     /**
      * @param {*} newItem
      * @description This function will save the new item to localStorage
@@ -53,3 +49,7 @@ export default function useLocalStorage(itemName, initialValue) {
 
     return { item, saveItem, loading, error };
 }
+
+//Refresh local storage //
+const localStorageTodosInstance = allTodos;
+// localStorage.setItem("todos", JSON.stringify(localStorageTodosInstance));
